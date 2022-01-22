@@ -2,7 +2,7 @@
 from inspect import isawaitable
 from typing import Any
 
-import aiohttp
+import httpx
 
 from lxml import etree
 
@@ -44,7 +44,7 @@ class Item(metaclass=ItemMeta):
             raise ValueError("<Item: html *or* url expected, not both.")
         if html or url:
             if url:
-                async with aiohttp.ClientSession() as session:
+                async with httpx.AsyncClient(http2=True) as session:
                     sem = kwargs.pop("sem", None)
                     request = Request(url, request_session=session, **kwargs)
                     if sem:

@@ -40,7 +40,7 @@ setup(
     long_description_content_type="text/markdown",
     author_email="xiaozizayang@gmail.com",
     python_requires=">=3.6",
-    install_requires=["aiohttp>=3.5.4", "cssselect", "lxml"],
+    install_requires=["httpx[http2]>=0.21.3", "cssselect", "lxml"],
     url="https://python-ruia.org/",
     packages=find_packages(),
     license="MIT",

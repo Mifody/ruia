@@ -8,7 +8,7 @@ from inspect import iscoroutinefunction
 from types import AsyncGeneratorType
 from typing import Coroutine, Optional, Tuple
 
-import aiohttp
+import httpx
 import async_timeout
 
 from ruia.exceptions import InvalidRequestMethod
@@ -91,7 +91,7 @@ class Request:
     @property
     def current_request_session(self):
         if self.request_session is None:
-            self.request_session = aiohttp.ClientSession()
+            self.request_session = httpx.AsyncClient(http2=True)
             self.close_request_session = True
         return self.request_session
 
@@ -177,11 +177,11 @@ class Request:
         self.logger.info(f"<{self.method}: {self.url}>")
         if self.method == "GET":
             request_func = self.current_request_session.get(
-                self.url, headers=self.headers, ssl=self.ssl, **self.aiohttp_kwargs
+                self.url, headers=self.headers, **self.aiohttp_kwargs
             )
         else:
             request_func = self.current_request_session.post(
-                self.url, headers=self.headers, ssl=self.ssl, **self.aiohttp_kwargs
+                self.url, headers=self.headers, **self.aiohttp_kwargs
             )
         resp = await request_func
         return resp

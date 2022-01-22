@@ -17,7 +17,7 @@ from inspect import isawaitable
 from signal import SIGINT, SIGTERM
 from types import AsyncGeneratorType
 
-from aiohttp import ClientSession
+from httpx import AsyncClient
 
 from ruia.exceptions import (
     InvalidCallbackResult,
@@ -173,7 +173,7 @@ class Spider(SpiderHook):
         self.aiohttp_kwargs = self.aiohttp_kwargs or {}
         self.spider_kwargs = spider_kwargs
         self.request_config = self.request_config or {}
-        self.request_session = ClientSession()
+        self.request_session = AsyncClient()
 
         self.cancel_tasks = cancel_tasks
         self.is_async_start = is_async_start

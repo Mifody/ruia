@@ -12,7 +12,7 @@ pylint = "*"
 yapf = "*"
 
 [packages]
-aiohttp = ">=3.5.4"
+httpx[http2] = ">=0.21.3"
 cssselect = "*"
 lxml = "*"
 

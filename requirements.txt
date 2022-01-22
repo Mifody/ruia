@@ -1,0 +1,11 @@
+pytest
+mkdocs
+mkdocs-material
+codecov
+pylint
+yapf
+
+httpx[http2]
+cssselect
+lxml
+async-timeout
